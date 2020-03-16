@@ -82,7 +82,7 @@ bot.on('message', (msg) => {
             }
         }else{
             console.feeback("Q:" + msg.text + "\tA: NOANSWER");
-            bot.sendMessage(msg.chat.id, "Al momento non sono in grado di rispondere alla tua domanda.\nTi consiglio di visitare i siti salute.gov.it e iss.it");
+            bot.sendMessage(msg.chat.id, "Al momento non sono in grado di rispondere alla tua domanda, ma mi informerò!\nNel frattempo ti consiglio di visitare i siti salute.gov.it e iss.it");
         }
      }
 });
