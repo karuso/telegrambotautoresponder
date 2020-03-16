@@ -43,15 +43,15 @@ bot.on('message', (msg) => {
      //bot.sendMessage(msg.chat.id, "Hello dear user");
      //console.log(msg);
      if(msg.text == "/start") return;
-     if(msg.text == "Ciao") {
+     if(msg.text == "Ciao" || msg.text == "ciao") {
          bot.sendMessage(msg.chat.id, "Ciao " + msg.from.first_name + ", chiedi quello che vuoi sul Coronavirus.");
          return;
      }
-     if(msg.text == "Buongiorno") {
+     if(msg.text == "Buongiorno" || msg.text == "buongiorno") {
          bot.sendMessage(msg.chat.id, "Buongiorno anche a te " + msg.from.first_name + ", chiedi quello che vuoi sul Coronavirus.");
          return;
      }
-     if(msg.text == "Buonasera") {
+     if(msg.text == "Buonasera" || msg.text == "buonasera") {
          bot.sendMessage(msg.chat.id, "Buonasera anche a te " + msg.from.first_name + ", chiedi quello che vuoi sul Coronavirus.");
          return;
      }
