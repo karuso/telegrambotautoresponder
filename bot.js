@@ -24,11 +24,6 @@ var fastAnswers = JSON.parse(fs.readFileSync('./answers.json', 'utf8'));
 // ---------- FAST ANSWERS END ----------
 
 console.log("[DEBUG] Bot is starting...");
-console.feeback("[FEEDBACK] Question and asnwer file");
-console.feeback("Format");
-console.feeback("Q:<question><tab>A:<answer>");
-console.feeback("-----------------------------------------------------------");
-
 
 disclaimer = "Nota: Le risposte sono tratte dal sito del Ministero della Salute (salute.gov.it) e dal sito dell'Istituto Superiore di Sanità (iss.it)";
 
@@ -73,7 +68,7 @@ bot.on('message', (msg) => {
                 // console.log(util.inspect(mex, false, null, true /* enable colors */));
                 if(mex.type == "text"){
                     bot.sendMessage(msg.chat.id, mex.reply + "\n\n" + disclaimer);
-                    console.feeback("Q:" + msg.text + "\tA:" + mex.reply);
+                    // console.feeback("Q:" + msg.text + "\tA:" + mex.reply);
                 }else if(mex.type == "image"){
                     if(mex.reply.includes("gif")){
                         bot.sendVideo(msg.chat.id, mex.reply);
@@ -86,8 +81,8 @@ bot.on('message', (msg) => {
                 }
             }
         }else{
-            console.feeback("Q:" + msg.text + "\tA: NO ANSWER");
-            bot.sendMessage(msg.chat.id, "Per info visita http://salute.gov.it");
+            console.feeback("Q:" + msg.text + "\tA: NOANSWER");
+            bot.sendMessage(msg.chat.id, "Al momento non sono in grado di rispondere alla tua domanda.\nTi consiglio di visitare i siti salute.gov.it e iss.it");
         }
      }
 });
