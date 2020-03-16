@@ -30,33 +30,36 @@ console.feeback("Q:<question><tab>A:<answer>");
 console.feeback("-----------------------------------------------------------");
 
 
+disclaimer = "Le risposte sono tratte dal sito del Ministero della Salute (salute.gov.it) e dal sito dell'Istituto Superiore di Sanità (iss.it)";
+
+
 keyboard = function(array_of_tags) {
     let markup = {
         "reply_markup": {
             "keyboard": [array_of_tags],
-            "resize_keyboard": true, 
+            "resize_keyboard": true,
             "one_time_keyboard": true
         }
     }
     return markup;
 }
 
-bot.on('message', (msg) => {  
-     //bot.sendMessage(msg.chat.id, "Hello dear user"); 
+bot.on('message', (msg) => {
+     //bot.sendMessage(msg.chat.id, "Hello dear user");
      //console.log(msg);
      let date = new Date(msg.date * 1000);
      let timestamp = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + "@" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-     
-    
+
+
     let msgFromInfo = "";
     if(msg.chat.type == "private"){
         msgFromInfo = msg.from.first_name + "(" + msg.from.id + ")";
     }else if(msg.chat.type == "group"){
         msgFromInfo = msg.from.first_name + "(" + msg.from.id + "/" + msg.chat.title + ")";
     }
-    
+
      console.log("[INFO](" + timestamp + ") Msg from " + msgFromInfo + ": " + msg.text);
-     
+
      if(msg.text != null){
         // let mex = controlMessage(msg.text);
         let results = advancedControlMessage(msg.text); // bool, array
@@ -69,7 +72,7 @@ bot.on('message', (msg) => {
                 mex = mex[0];
                 // console.log(util.inspect(mex, false, null, true /* enable colors */));
                 if(mex.type == "text"){
-                    bot.sendMessage(msg.chat.id, mex.reply);
+                    bot.sendMessage(msg.chat.id, mex.reply + "\n" + disclaimer);
                     console.feeback("Q:" + msg.text + "\tA:" + mex.reply);
                 }else if(mex.type == "image"){
                     if(mex.reply.includes("gif")){
@@ -91,7 +94,7 @@ bot.on('message', (msg) => {
 
 
 function controlMessage(message){
-    
+
     /*
     for (const [key, phrases] of Object.entries(fastAnswers)) { //Check for fast answers
         if(message.toLowerCase().includes(key)){
@@ -100,16 +103,16 @@ function controlMessage(message){
         }
     }
     */
-    
+
     let found = null;
     //TODO: Should substitute forEach with for (const [triggers, oneFastAnswer] of Object.entries(fastAnswers)), in order to use return inside the loop
     fastAnswers.forEach(function(fastAnswer){ //For every fast answer
         fastAnswer.triggers.forEach(function(trigger){ //Check among all triggers
             let regex = new RegExp("\\b"+trigger+"\\b", "gi");//Search global and case insenstive
             let regexResult = message.match(regex);
-            
+
             //console.log("Regex result: " + regexResult);
-            
+
             if((regexResult != null) && !found){ //If RegEx matches and wasn't previously found
                 let rnd = Math.floor((Math.random() * (fastAnswer.replies.length)) + 0);
                 found = fastAnswer.replies[rnd];
@@ -117,7 +120,7 @@ function controlMessage(message){
             }
         });
     });
-    
+
     return found;
 }
 
@@ -130,7 +133,7 @@ function advancedControlMessage(message){
         fastAnswer.triggers.forEach(function(trigger){ //Check among all triggers
             let regex = new RegExp("\\b"+trigger+"\\b", "gi");//Search global and case insenstive
             let regexResult = message.match(regex);
-            
+
             if(regexResult != null){
                 found = true;
                 found_tags.push(regexResult[0])
@@ -141,10 +144,10 @@ function advancedControlMessage(message){
         });
     });
 
-    if(found && found_tags.length === 1) {        
+    if(found && found_tags.length === 1) {
         return [true, [reply]];
     }
-    
+
     return [found, found_tags];   // values.first, values.second
 }
 
