@@ -1,6 +1,7 @@
 #Env & debug
 .env
 debug.log
+feedback.log
 
 # Logs
 logs
@@ -63,3 +64,8 @@ typings/
 
 # next.js build output
 .next
+
+# MacOS hidden files
+.DS_Store
+
+
