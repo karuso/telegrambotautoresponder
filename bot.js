@@ -43,9 +43,18 @@ bot.on('message', (msg) => {
      //bot.sendMessage(msg.chat.id, "Hello dear user");
      //console.log(msg);
      if(msg.text == "/start") return;
-     if(msg.text == "Ciao") bot.sendMessage(msg.chat.id, "Ciao, chiedi quello che vuoi sul Coronavirus.");
-     if(msg.text == "Buongiorno") bot.sendMessage(msg.chat.id, "Buongiorno anche a te, chiedi quello che vuoi sul Coronavirus.");
-     if(msg.text == "Buonasera") bot.sendMessage(msg.chat.id, "Buonasera anche a te, chiedi quello che vuoi sul Coronavirus.");
+     if(msg.text == "Ciao") {
+         bot.sendMessage(msg.chat.id, "Ciao " + msg.from.first_name + ", chiedi quello che vuoi sul Coronavirus.");
+         return;
+     }
+     if(msg.text == "Buongiorno") {
+         bot.sendMessage(msg.chat.id, "Buongiorno anche a te " + msg.from.first_name + ", chiedi quello che vuoi sul Coronavirus.");
+         return;
+     }
+     if(msg.text == "Buonasera") {
+         bot.sendMessage(msg.chat.id, "Buonasera anche a te " + msg.from.first_name + ", chiedi quello che vuoi sul Coronavirus.");
+         return;
+     }
 
      let date = new Date(msg.date * 1000);
      let timestamp = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + "@" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
