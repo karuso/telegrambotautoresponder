@@ -30,7 +30,7 @@ console.feeback("Q:<question><tab>A:<answer>");
 console.feeback("-----------------------------------------------------------");
 
 
-disclaimer = "Le risposte sono tratte dal sito del Ministero della Salute (salute.gov.it) e dal sito dell'Istituto Superiore di Sanità (iss.it)";
+disclaimer = "Nota: Le risposte sono tratte dal sito del Ministero della Salute (salute.gov.it) e dal sito dell'Istituto Superiore di Sanità (iss.it)";
 
 
 keyboard = function(array_of_tags) {
@@ -72,7 +72,7 @@ bot.on('message', (msg) => {
                 mex = mex[0];
                 // console.log(util.inspect(mex, false, null, true /* enable colors */));
                 if(mex.type == "text"){
-                    bot.sendMessage(msg.chat.id, mex.reply + "\n" + disclaimer);
+                    bot.sendMessage(msg.chat.id, mex.reply + "\n\n" + disclaimer);
                     console.feeback("Q:" + msg.text + "\tA:" + mex.reply);
                 }else if(mex.type == "image"){
                     if(mex.reply.includes("gif")){
