@@ -38,7 +38,7 @@
         ],
         "replies": [
             {
-                "reply": "l DPCM dell'8 marzo 2020 raccomanda a tutte le persone anziane o affette da una o più patologie croniche o con stati di immunodepressione congenita o acquisita, di evitare di uscire dalla propria abitazione o dimora fuori dai casi di stretta necessità e di evitare comunque luoghi affollati nei quali non sia possibile mantenere la distanza di sicurezza interpersonale di almeno un metro.",
+                "reply": "Il DPCM dell'8 marzo 2020 raccomanda a tutte le persone anziane o affette da una o più patologie croniche o con stati di immunodepressione congenita o acquisita, di evitare di uscire dalla propria abitazione o dimora fuori dai casi di stretta necessità e di evitare comunque luoghi affollati nei quali non sia possibile mantenere la distanza di sicurezza interpersonale di almeno un metro.",
                 "type": "text"
             }
         ]
@@ -52,6 +52,20 @@
         "replies": [
             {
                 "reply": "Il periodo di incubazione rappresenta il periodo di tempo che intercorre fra il contagio e lo sviluppo dei sintomi clinici. Si stima attualmente che vari fra 2 e 11 giorni, fino ad un massimo di 14 giorni.",
+                "type": "text"
+            }
+        ]
+    },
+    {
+        "triggers": [
+            "guant0",
+            "guanti",
+            "infezione",
+            "infezioni"
+        ],
+        "replies": [
+            {
+                "reply": "I guanti servono a prevenire le infezioni a patto che:\n- non sostituiscano la corretta igiene delle mani che deve avvenire attraverso un lavaggio accurato e per almeno venti secondi\n- siano ricambiati ogni volta che si sporcano ed eliminati correttamente nei rifiuti indifferenziati\n- come le mani, non vengano a contatto con bocca naso e occhi\n- siano eliminati al termine dell’uso, per esempio, al supermercato\n- non siano riutilizzati\n\nSono necessari in alcuni contesti lavorativi come per esempio personale addetto alla pulizia, alla ristorazione o al commercio di alimenti.\n\nSono indispensabili nel caso di assistenza ospedaliera o domiciliare a malati.",
                 "type": "text"
             }
         ]
@@ -154,7 +168,7 @@
         ],
         "replies": [
             {
-                "reply": "Si, è sicuro. L’OMS ha dichiarato che le persone che ricevono pacchi non sono a rischio di contrarre il nuovo Coronavirus, soprattutto in relazione all’esposizione a temperature e condizioni diverse.",
+                "reply": "L’OMS ha dichiarato che le persone che ricevono pacchi non sono a rischio di contrarre il nuovo Coronavirus, soprattutto in relazione all’esposizione a temperature e condizioni diverse.",
                 "type": "text"
             }
         ]
@@ -168,7 +182,7 @@
         ],
         "replies": [
             {
-                "reply": "No, al momento non vi è alcuna evidenza scientifica che gli animali da compagnia, quali cani e gatti, abbiano contratto l’infezione o possano diffonderla. Si raccomanda di lavare le mani frequentemente con acqua e sapone o usando soluzioni alcoliche dopo il contatto con gli animali.",
+                "reply": "Al momento non vi è alcuna evidenza scientifica che gli animali da compagnia, quali cani e gatti, abbiano contratto l’infezione o possano diffonderla. Si raccomanda di lavare le mani frequentemente con acqua e sapone o usando soluzioni alcoliche dopo il contatto con gli animali.",
                 "type": "text"
             }
         ]
@@ -179,7 +193,7 @@
         ],
         "replies": [
             {
-                "reply": "No, essendo una malattia nuova, ancora non esiste un vaccino e per realizzarne uno ad hoc i tempi possono essere anche relativamente lunghi (si stima 12-18 mesi).",
+                "reply": "Essendo una malattia nuova, ancora non esiste un vaccino e per realizzarne uno ad hoc i tempi possono essere anche relativamente lunghi (si stima 12-18 mesi).",
                 "type": "text"
             }
         ]
@@ -226,7 +240,7 @@
         ],
         "replies": [
             {
-                "reply": "No, gli antibiotici non sono efficaci contro i virus, ma funzionano solo contro le infezioni batteriche.",
+                "reply": "Gli antibiotici non sono efficaci contro i virus, ma funzionano solo contro le infezioni batteriche.",
                 "type": "text"
             }
         ]
@@ -355,5 +369,18 @@
                 "type": "text"
             }
         ]
+    },
+    {
+        "triggers": [
+            "testapi"
+        ],
+        "replies": [
+            {
+                "type": "api",
+                "api": "https://swapi.co/api/people/1/",
+                "ref": "SWAPI"
+            }
+        ]
     }
+
 ]
