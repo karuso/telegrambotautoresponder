@@ -1,6 +1,7 @@
 require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
 const bot = new TelegramBot(process.env.TELEGRAM_TOKEN, {polling: true});
+var api_request = require('request');
 
 // ---------- LOGGIN FEATURES ----------
 var fs = require('fs');
@@ -104,6 +105,19 @@ bot.on('message', (msg) => {
                 }else if(mex.type == "audio"){
                     //bot.sendAudio(msg.chat.id, mex.reply, "Xfox Assistant Bot", "Title", "Caption");
                     bot.sendVoice(msg.chat.id, mex.reply);
+                }else if(mex.type == "api"){
+                    api_request.get(mex.api, (error, response, body) => {
+                        data = JSON.parse(body);
+                        var last = data[data.length - 1];
+                        var last_date = new Date(last["data"]);
+                        var update_date = addZero(last_date.getDate()) + "/" + addZero(last_date.getMonth()) + "/" + last_date.getFullYear() + " alle ore "+ addZero(last_date.getHours()) + ":" + addZero(last_date.getMinutes());
+                        var reply = "Ultimo aggiornamento " + update_date + "\n\n";
+                        reply +=  "Positivi: " + last["totale_attualmente_positivi"] + "\n";
+                        reply +=  "Deceduti: " + last["deceduti"] + "\n";
+                        reply +=  "Guariti:  " + last["dimessi_guariti"] + "\n";
+
+                        bot.sendMessage(msg.chat.id, reply + "\n\n" + mex.ref);
+                    });
                 }
             }
         }else{
@@ -125,22 +139,22 @@ function controlMessage(message){
     }
     */
 
-    let found = null;
-    //TODO: Should substitute forEach with for (const [triggers, oneFastAnswer] of Object.entries(fastAnswers)), in order to use return inside the loop
-    fastAnswers.forEach(function(fastAnswer){ //For every fast answer
-        fastAnswer.triggers.forEach(function(trigger){ //Check among all triggers
-            let regex = new RegExp("\\b"+trigger+"\\b", "gi");//Search global and case insenstive
-            let regexResult = message.match(regex);
+    // let found = null;
+    // //TODO: Should substitute forEach with for (const [triggers, oneFastAnswer] of Object.entries(fastAnswers)), in order to use return inside the loop
+    // fastAnswers.forEach(function(fastAnswer){ //For every fast answer
+    //     fastAnswer.triggers.forEach(function(trigger){ //Check among all triggers
+    //         let regex = new RegExp("\\b"+trigger+"\\b", "gi");//Search global and case insenstive
+    //         let regexResult = message.match(regex);
 
-            //console.log("Regex result: " + regexResult);
+    //         //console.log("Regex result: " + regexResult);
 
-            if((regexResult != null) && !found){ //If RegEx matches and wasn't previously found
-                let rnd = Math.floor((Math.random() * (fastAnswer.replies.length)) + 0);
-                found = fastAnswer.replies[rnd];
-                //return fastAnswer.replies[rnd]; //Can't do this with forEach (ahw man, that sucks), see comment above, substitute forEach with for
-            }
-        });
-    });
+    //         if((regexResult != null) && !found){ //If RegEx matches and wasn't previously found
+    //             let rnd = Math.floor((Math.random() * (fastAnswer.replies.length)) + 0);
+    //             found = fastAnswer.replies[rnd];
+    //             //return fastAnswer.replies[rnd]; //Can't do this with forEach (ahw man, that sucks), see comment above, substitute forEach with for
+    //         }
+    //     });
+    // });
 
     return found;
 }
@@ -172,3 +186,7 @@ function advancedControlMessage(message){
     return [found, found_tags];   // values.first, values.second
 }
 
+
+function addZero(digit) {
+    return ('0' + digit).slice(-2);
+}

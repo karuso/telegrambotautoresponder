@@ -372,15 +372,17 @@
     },
     {
         "triggers": [
-            "testapi"
+            "dati",
+            "positivi",
+            "deceduti",
+            "guariti"
         ],
         "replies": [
             {
                 "type": "api",
-                "api": "https://swapi.co/api/people/1/",
-                "ref": "SWAPI"
+                "api": "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json",
+                "ref": "fonte Protezione Civile :: Dati COVID-19 Italia"
             }
         ]
     }
-
 ]
