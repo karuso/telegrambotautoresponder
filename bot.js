@@ -56,6 +56,18 @@ bot.on('message', (msg) => {
          return;
      }
 
+     if(msg.text == "Grazie" || msg.text == "grazie") {
+         bot.sendMessage(msg.chat.id, "Prego " + msg.from.first_name);
+         return;
+     }
+
+     if(msg.text == "Arrivederci" || msg.text == "arrivederci") {
+         bot.sendMessage(msg.chat.id, "Arrivederci " + msg.from.first_name + ", è stato un piacere rispondere alle tue domande.\nSe hai altri dubbi, sai dove trovarmi 😉");
+         return;
+     }
+
+
+
      let date = new Date(msg.date * 1000);
      let timestamp = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + "@" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
