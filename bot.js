@@ -108,14 +108,8 @@ bot.on('message', (msg) => {
                 }else if(mex.type == "api"){
                     api_request.get(mex.api, (error, response, body) => {
                         data = JSON.parse(body);
-                        var last = data[data.length - 1];
-                        var last_date = new Date(last["data"]);
-                        var update_date = addZero(last_date.getDate()) + "/" + addZero(last_date.getMonth()) + "/" + last_date.getFullYear() + " alle ore "+ addZero(last_date.getHours()) + ":" + addZero(last_date.getMinutes());
-                        var reply = "Ultimo aggiornamento " + update_date + "\n\n";
-                        reply +=  "Positivi: " + last["totale_attualmente_positivi"] + "\n";
-                        reply +=  "Deceduti: " + last["deceduti"] + "\n";
-                        reply +=  "Guariti:  " + last["dimessi_guariti"] + "\n";
-
+                        var reply = global[mex.parser](data);
+                        // var reply = parseProtezioneCivileApi(data);
                         bot.sendMessage(msg.chat.id, reply + "\n\n" + mex.ref);
                     });
                 }
@@ -189,4 +183,16 @@ function advancedControlMessage(message){
 
 function addZero(digit) {
     return ('0' + digit).slice(-2);
+}
+
+global.parseProtezioneCivileApi = function(data) {
+    var last = data[data.length - 1];
+    var last_date = new Date(last["data"]);
+    var update_date = addZero(last_date.getDate()) + "/" + addZero(last_date.getMonth()) + "/" + last_date.getFullYear() + " alle ore "+ addZero(last_date.getHours()) + ":" + addZero(last_date.getMinutes());
+    var reply = "Ultimo aggiornamento " + update_date + "\n\n";
+    reply +=  "Positivi: " + last["totale_attualmente_positivi"] + "\n";
+    reply +=  "Deceduti: " + last["deceduti"] + "\n";
+    reply +=  "Guariti:  " + last["dimessi_guariti"] + "\n";
+
+    return reply;
 }
